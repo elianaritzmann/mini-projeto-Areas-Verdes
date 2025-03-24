@@ -9,6 +9,7 @@ import java.util.Scanner;
 import areaverde.AreaVerdeRepository;
 import avaliacao.AvaliacaoRepository;
 import localizacao.Localizacao;
+import localizacao.LocalizacaoRepository;
 
 import static areaverde.AreaVerdeRepository.areasverdes;
 
@@ -20,6 +21,7 @@ public class main {
         Scanner entrada = new Scanner(System.in);
         AreaVerdeRepository areaRepo = new AreaVerdeRepository();
         AvaliacaoRepository avaliacaoRepo = new AvaliacaoRepository();
+
         int opcao;
 
         do {
@@ -103,7 +105,7 @@ public class main {
     private static void registroAreaVerde(Scanner entrada, AreaVerdeRepository areaRepo) {
         System.out.println("Digite os dados para inserir uma nova área");
 
-        AreaVerde novaArea = new AreaVerde(); //criou o objeto areaverde
+        AreaVerde novaArea = new AreaVerde();
 
         System.out.println("Digite o nome da área");
 
@@ -111,6 +113,7 @@ public class main {
         novaArea.setNome(nomeArea);
 
         Localizacao localizacao = new Localizacao();
+        LocalizacaoRepository localrepo = new LocalizacaoRepository();
         System.out.println("Digite a as coordenadas da localização");
         System.out.println("Digite a latitude");
         double altitude = entrada.nextInt();
@@ -123,6 +126,8 @@ public class main {
         entrada.nextLine();
         novaArea.setLongitude(longitude);
         localizacao.setLongitude(longitude);
+
+        localrepo.adicionarLocal(localizacao);
 
         System.out.println("Digite o tipo de vegetação.");
         String tipoVegetacao = entrada.nextLine();
